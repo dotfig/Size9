@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en-US">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SizeNINE</title>
+  <link href="css/singlePageTemplate.css" rel="stylesheet" type="text/css">
+  <script>var __adobewebfontsappname__ = "dreamweaver"</script>
+  <script src="http://use.edgefonts.net/source-sans-pro:n2:default.js" type="text/javascript"></script>
+  <script src="index.js" type="text/javascript"></script>
+  <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  <script>
+    function showUser(str) {
+      if (str == "") {
+        document.getElementById("txtHint").innerHTML = "";
+        return;
+      }
+      if (window.XMLHttpRequest) {
+        // code for IE7+, Firefox, Chrome, Opera, Safari
+        xmlhttp = new XMLHttpRequest();
+      } else { // code for IE6, IE5
+        xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+      }
+      xmlhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+          document.getElementById("txtHint").innerHTML = this.responseText;
+        }
+      }
+      xmlhttp.open("GET", "php/getuser.php?q=" + str, true);
+      xmlhttp.send();
+    }
+  </script>
+</head>
+
+<body>
+  <div class="container">
+    <header>
+      <a href="index.html">
+        <h4 class="logo">SIZE
+          <span class="light">NINE</span>
+        </h4>
+      </a>
+      <nav>
+        <ul>
+          <li>
+            <form>
+              <input type="text" size="30" onkeyup="showResult(this.value)">
+              <div id="livesearch"></div>
+            </form>
+          </li>
+          <li>
+            <a href="php/start.php">
+              <img src="images/account.svg" alt="signin" />
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+    <section class="hero" id="hero">
+      <h2 class="hero_header">SIZENINE
+        <span class="light">admin</span>
+      </h2>
+      <p class="tagline">Login for Admin Controls</p>
+    </section>
+    <form>
+      <select name="users" onchange="showUser(this.value)">
+        <option value="">Select a category:</option>
+        <option value="1">Inventory</option>
+      </select>
+    </form>
+    <br>
+    <div id="txtHint">
+      <b></b>
+    </div>
+    <div class="copyright">&copy;2018 -
+      <strong>SizeNINE
+        </strong>
+    </div>
+  </div>
+</body>
+
+</html>
